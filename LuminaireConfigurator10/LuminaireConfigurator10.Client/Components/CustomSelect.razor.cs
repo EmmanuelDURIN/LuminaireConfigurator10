@@ -1,13 +1,10 @@
-﻿using LuminaireConfigurator10.Client.ViewModel;
-using LuminaireConfigurator10.Client.Services;
-using Microsoft.AspNetCore.Components;
-using Microsoft.AspNetCore.Components.Forms;
+﻿using Microsoft.AspNetCore.Components;
 
 namespace LuminaireConfigurator10.Client.Components
 {
-    public partial class CustomSelect
+    public partial class CustomSelect<TItem>
     {
         [Parameter]
-        public IEnumerable<string> Items { get; set; } = Enumerable.Empty<string>();
+        public IEnumerable<TItem> Items { get; set; } = Enumerable.Empty<TItem>();
     }
 }
