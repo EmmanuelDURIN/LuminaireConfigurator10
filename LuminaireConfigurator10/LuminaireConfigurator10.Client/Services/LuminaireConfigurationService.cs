@@ -12,9 +12,20 @@ namespace LuminaireConfigurator10.Client.Services
     }
     public async Task<List<LuminaireConfiguration>?> GetLuminaireConfigurations()
     {
-            // await Task.Delay(500);
-            List<LuminaireConfiguration>? luminaireConfigurations = await httpClient.GetFromJsonAsync<List<LuminaireConfiguration>>(requestUri: $"api/luminaireconfiguration", CancellationToken.None);
-            return luminaireConfigurations;
+      // await Task.Delay(500);
+      List<LuminaireConfiguration>? luminaireConfigurations = await httpClient.GetFromJsonAsync<List<LuminaireConfiguration>>(requestUri: $"api/luminaireconfiguration", CancellationToken.None);
+      return luminaireConfigurations;
+    }
+    public async Task<LuminaireConfiguration?> PostAsync(LuminaireConfiguration luminaireConfiguration)
+    {
+      HttpResponseMessage httpResponseMessage = await httpClient.PostAsJsonAsync("api/luminaireconfiguration", luminaireConfiguration);
+      httpResponseMessage.EnsureSuccessStatusCode();
+      if (httpResponseMessage.IsSuccessStatusCode)
+      {
+        LuminaireConfiguration? createdLuminaireConfiguration = await httpResponseMessage.Content.ReadFromJsonAsync<LuminaireConfiguration>();
+        return createdLuminaireConfiguration;
+      }
+      return null;
     }
   }
 }

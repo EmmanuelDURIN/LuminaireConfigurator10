@@ -1,6 +1,6 @@
 ﻿@page "/configurationcreation"
 @using LuminaireConfigurator10.Client.Components
-@rendermode InteractiveAuto
+@rendermode @(new InteractiveWebAssemblyRenderMode(prerender:false) )
 
 <h1>New Configuration @(IsModified?"*":"")</h1>
 <EditForm OnValidSubmit="Create" EditContext="@EditContext">

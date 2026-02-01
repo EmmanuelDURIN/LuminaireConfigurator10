@@ -2,17 +2,22 @@
 using Microsoft.AspNetCore.Components.Forms;
 using LuminaireConfigurator10.Client.Model;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Components;
 
 namespace LuminaireConfigurator10.Client.Pages
 {
     public partial class ConfigurationCreation
     {
+        private ILuminaireConfigurationService luminaireConfigurationService;
+        private NavigationManager navigationManager;
         private ValidationMessageStore messageStore;
         public ViewModel.LuminaireConfiguration Configuration { get; set; } = new();
         public EditContext EditContext { get; set; }
         public bool IsModified => EditContext.IsModified();
-        public ConfigurationCreation()
+        public ConfigurationCreation(ILuminaireConfigurationService luminaireConfigurationService, NavigationManager navigationManager)
         {
+            this.navigationManager = navigationManager;
+            this.luminaireConfigurationService = luminaireConfigurationService;
             EditContext = new(Configuration);
             EditContext.OnValidationRequested += HandleValidationRequested;
             EditContext.OnFieldChanged += EditContextFieldChanged;
@@ -33,6 +38,14 @@ namespace LuminaireConfigurator10.Client.Pages
         public void Create()
         {
             Console.WriteLine("configuration created");
+            Model.LuminaireConfiguration? createdConf = new ()
+            {
+                Name = Configuration.Name,
+                LampColor = Configuration.LampColor??0,
+                Optic = Configuration.Optic?.Name
+            };
+            if ( luminaireConfigurationService.PostAsync(createdConf) != null )
+             navigationManager.NavigateTo("/configurationlist");
         }
         public int[] LampColors { get; set; } = [2200, 2700, 3000, 4000, 5700];
         public List<Optic> Optics { get; set; } = new List<Optic>();

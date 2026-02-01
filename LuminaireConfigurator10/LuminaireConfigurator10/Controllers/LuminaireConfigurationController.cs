@@ -8,7 +8,7 @@ namespace WebApiWeatherForeCast.Controllers
     public class LuminaireConfigurationController
      : ControllerBase
     {
-        private List<LuminaireConfiguration> luminaireConfigurations = new List<LuminaireConfiguration>()
+        private static List<LuminaireConfiguration> luminaireConfigurations = new List<LuminaireConfiguration>()
             {
               new LuminaireConfiguration
               {
@@ -49,6 +49,14 @@ namespace WebApiWeatherForeCast.Controllers
             if (lumConf == null)
                 return NotFound("No Luminaire with id=" + id);
             return Ok(lumConf);
+        }
+        [HttpPost]
+        public ActionResult Post(LuminaireConfiguration lumConf)
+        {
+            int maxId = luminaireConfigurations.Max(l => l.Id);
+            lumConf.Id = maxId + 1;
+            luminaireConfigurations.Add(lumConf);
+            return CreatedAtAction(nameof(GetById), routeValues: new { Id = lumConf.Id }, lumConf);
         }
     }
 }
