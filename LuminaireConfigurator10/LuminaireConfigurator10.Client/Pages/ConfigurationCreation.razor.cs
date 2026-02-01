@@ -1,6 +1,7 @@
 ﻿using LuminaireConfigurator10.Client.Services;
 using Microsoft.AspNetCore.Components.Forms;
 using LuminaireConfigurator10.Client.Model;
+using System.ComponentModel.DataAnnotations;
 
 namespace LuminaireConfigurator10.Client.Pages
 {
@@ -35,6 +36,9 @@ namespace LuminaireConfigurator10.Client.Pages
         }
         public int[] LampColors { get; set; } = [2200, 2700, 3000, 4000, 5700];
         public List<Optic> Optics { get; set; } = new List<Optic>();
+        [Required]
+        public Optic Optic { get; set; } = new Optic ( Id : 1, Name : "OM10" );
+
         protected async override Task OnInitializedAsync()
         {
             var opticService = new OpticService();

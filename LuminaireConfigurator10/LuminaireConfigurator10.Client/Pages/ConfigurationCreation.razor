@@ -17,8 +17,9 @@
         <label class="col-sm-3 col-form-label" for="Optic">Optic</label>
         <div class="col-sm-9">
         <CustomSelect Items="@this.Optics"
-                    DisplaySelector="o=>o.Name.ToUpper()"
-                    ValueSelector="o=>o.Id">
+                    Selected="@Configuration.Optic"
+                    DisplaySelector="o=>o?.Name?.ToUpper()"
+                    ValueSelector="o=>o?.Id">
             <option>Please select one</option>
         </CustomSelect>
         </div>

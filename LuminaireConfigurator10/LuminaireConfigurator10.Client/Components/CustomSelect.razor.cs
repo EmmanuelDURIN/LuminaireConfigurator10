@@ -6,15 +6,18 @@ namespace LuminaireConfigurator10.Client.Components
     {
         [Parameter]
         public IEnumerable<TItem> Items { get; set; } = Enumerable.Empty<TItem>();
+        
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
-
 
         [Parameter, EditorRequired]
         public Func<TItem, TValue> ValueSelector { get; set; } = null!;
 
         [Parameter, EditorRequired]
         public Func<TItem, TDisplay> DisplaySelector { get; set; } = null!;
+
+        [Parameter, EditorRequired]
+        public TItem? Selected { get; set; }
 
     }
 }
