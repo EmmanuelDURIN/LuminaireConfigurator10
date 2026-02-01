@@ -2,12 +2,19 @@
 
 namespace LuminaireConfigurator10.Client.Components
 {
-    public partial class CustomSelect<TItem>
+    public partial class CustomSelect<TItem, TValue, TDisplay>
     {
         [Parameter]
         public IEnumerable<TItem> Items { get; set; } = Enumerable.Empty<TItem>();
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
+
+
+        [Parameter, EditorRequired]
+        public Func<TItem, TValue> ValueSelector { get; set; } = null!;
+
+        [Parameter, EditorRequired]
+        public Func<TItem, TDisplay> DisplaySelector { get; set; } = null!;
 
     }
 }

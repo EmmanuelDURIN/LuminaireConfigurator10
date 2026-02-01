@@ -1,9 +1,13 @@
 ﻿@typeparam TItem
+@typeparam TValue
+@typeparam TDisplay
+
 
 <select class="form-control">
     @ChildContent
     @foreach (var item in Items)
     {
-        <option>@item</option>
+        <option value="@ValueSelector(item)">@DisplaySelector(item)</option>
     }
+
 </select>
