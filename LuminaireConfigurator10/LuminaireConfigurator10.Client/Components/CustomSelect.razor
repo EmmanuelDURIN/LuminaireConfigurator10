@@ -2,7 +2,7 @@
 @typeparam TValue
 @typeparam TDisplay
 
-<select class="form-control">
+<select class="form-control" @onchange="OnSelectedChanged">
     @ChildContent
     @foreach (var item in Items)
     {

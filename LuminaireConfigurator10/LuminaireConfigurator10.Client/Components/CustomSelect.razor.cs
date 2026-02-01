@@ -6,7 +6,7 @@ namespace LuminaireConfigurator10.Client.Components
     {
         [Parameter]
         public IEnumerable<TItem> Items { get; set; } = Enumerable.Empty<TItem>();
-        
+
         [Parameter]
         public RenderFragment? ChildContent { get; set; }
 
@@ -19,5 +19,13 @@ namespace LuminaireConfigurator10.Client.Components
         [Parameter, EditorRequired]
         public TItem? Selected { get; set; }
 
+        private async Task OnSelectedChanged(ChangeEventArgs e)
+        {
+            Selected = Items.FirstOrDefault(i => ValueSelector(i)?.ToString()?.Equals(e.Value?.ToString()) == true);
+            await SelectedChanged.InvokeAsync(Selected);
+        }
+       
+        [Parameter]
+        public EventCallback<TItem> SelectedChanged { get; set; }
     }
 }
