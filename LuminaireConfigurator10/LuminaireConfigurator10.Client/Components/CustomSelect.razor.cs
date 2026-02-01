@@ -27,5 +27,17 @@ namespace LuminaireConfigurator10.Client.Components
        
         [Parameter]
         public EventCallback<TItem> SelectedChanged { get; set; }
+
+        private TValue? selectedValue { get; set; }
+        public TValue? SelectedValue
+        {
+            get => selectedValue;
+            set
+            {
+                selectedValue = value;
+                Selected = Items.FirstOrDefault(i => ValueSelector(i)?.ToString()?.Equals(value?.ToString()) == true);
+                SelectedChanged.InvokeAsync(Selected);
+            }
+        }
     }
 }
