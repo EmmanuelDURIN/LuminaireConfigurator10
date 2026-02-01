@@ -14,6 +14,6 @@ namespace LuminaireConfigurator10.Client.ViewModel
         public string? Optic { get; set; }
         [Required]
         [Range(1,1E6)]
-        public int LampColor { get; set; }
+        public int? LampColor { get; set; }
     }
 }
