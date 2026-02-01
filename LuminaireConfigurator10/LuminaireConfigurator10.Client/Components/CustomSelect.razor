@@ -1,6 +1,7 @@
 ﻿@typeparam TItem
 
 <select class="form-control">
+    @ChildContent
     @foreach (var item in Items)
     {
         <option>@item</option>

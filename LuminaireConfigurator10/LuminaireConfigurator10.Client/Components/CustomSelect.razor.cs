@@ -6,5 +6,8 @@ namespace LuminaireConfigurator10.Client.Components
     {
         [Parameter]
         public IEnumerable<TItem> Items { get; set; } = Enumerable.Empty<TItem>();
+        [Parameter]
+        public RenderFragment? ChildContent { get; set; }
+
     }
 }

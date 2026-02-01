@@ -34,7 +34,7 @@ namespace LuminaireConfigurator10.Client.Pages
         {
             Console.WriteLine("configuration created");
         }
-        public int?[] LampColors { get; set; } = [ null, 2200, 2700, 3000, 4000, 5700 ];
-        public string?[] Optics { get; set; } = [null, "ON10", "ON11", "OL10", "OL11", "OM10", "OM11" ];
+        public int[] LampColors { get; set; } = [ 2200, 2700, 3000, 4000, 5700 ];
+        public string[] Optics { get; set; } = [ "ON10", "ON11", "OL10", "OL11", "OM10", "OM11" ];
     }
 }
