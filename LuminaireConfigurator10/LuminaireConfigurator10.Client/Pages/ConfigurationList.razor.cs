@@ -3,7 +3,7 @@ using LuminaireConfigurator10.Client.Services;
 
 namespace LuminaireConfigurator10.Client.Pages
 {
-    public partial class ConfigurationList
+    public partial class ConfigurationList ( ILuminaireConfigurationService luminaireConfigurationService )
     {
         private List<LuminaireConfiguration>? luminaireConfigurations = null;
         public List<LuminaireConfiguration>? LuminaireConfigurations
@@ -14,7 +14,7 @@ namespace LuminaireConfigurator10.Client.Pages
 
         protected override async Task OnInitializedAsync()
         {
-           luminaireConfigurations = await new LuminaireConfigurationService().GetLuminaireConfigurations();
+           luminaireConfigurations = await luminaireConfigurationService.GetLuminaireConfigurations();
         }
     }
 }

@@ -1,4 +1,5 @@
 using LuminaireConfigurator10.Client.Pages;
+using LuminaireConfigurator10.Client.Services;
 using LuminaireConfigurator10.Components;
 
 namespace LuminaireConfigurator10
@@ -13,6 +14,7 @@ namespace LuminaireConfigurator10
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents()
                 .AddInteractiveWebAssemblyComponents();
+            // builder.Services.AddTransient<ILuminaireConfigurationService, LuminaireConfigurationService>();
 
             var app = builder.Build();
 

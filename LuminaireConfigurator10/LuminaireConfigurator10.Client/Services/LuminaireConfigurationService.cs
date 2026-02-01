@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace LuminaireConfigurator10.Client.Services
 {
-  public class LuminaireConfigurationService
-  {
-    private List<LuminaireConfiguration> luminaireConfigurations = new List<LuminaireConfiguration>()
+    public class LuminaireConfigurationService : ILuminaireConfigurationService
+    {
+        private List<LuminaireConfiguration> luminaireConfigurations = new List<LuminaireConfiguration>()
             {
               new LuminaireConfiguration
               {
@@ -38,15 +38,15 @@ namespace LuminaireConfigurator10.Client.Services
                 Name="Luminaires Puteaux"
               },
             };
-    public async Task<LuminaireConfiguration?> GetLuminaireConfigurationById(int id)
-    {
-      await Task.Delay(500);
-      return luminaireConfigurations.FirstOrDefault( lc => lc.Id == id);
+        public async Task<LuminaireConfiguration?> GetLuminaireConfigurationById(int id)
+        {
+            await Task.Delay(500);
+            return luminaireConfigurations.FirstOrDefault(lc => lc.Id == id);
+        }
+        public async Task<List<LuminaireConfiguration>> GetLuminaireConfigurations()
+        {
+            await Task.Delay(500);
+            return luminaireConfigurations;
+        }
     }
-    public async Task<List<LuminaireConfiguration>> GetLuminaireConfigurations()
-    {
-      await Task.Delay(500);
-      return luminaireConfigurations;
-    }
-  }
 }
