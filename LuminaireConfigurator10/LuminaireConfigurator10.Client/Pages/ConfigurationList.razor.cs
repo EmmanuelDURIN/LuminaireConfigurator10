@@ -11,7 +11,6 @@ namespace LuminaireConfigurator10.Client.Pages
             get => luminaireConfigurations;
             set => luminaireConfigurations = value;
         }
-
         protected override async Task OnInitializedAsync()
         {
            luminaireConfigurations = await luminaireConfigurationService.GetLuminaireConfigurations();

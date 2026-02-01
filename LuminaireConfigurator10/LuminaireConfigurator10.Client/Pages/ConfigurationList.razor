@@ -1,6 +1,6 @@
 ﻿@page "/configurationlist"
 @page "/configurations"
-@attribute [StreamRendering]
+@rendermode @(new InteractiveWebAssemblyRenderMode(prerender:false) )
 
 @using LuminaireConfigurator10.Client.Model
 

@@ -9,6 +9,10 @@ namespace LuminaireConfigurator10.Client
         {
             var builder = WebAssemblyHostBuilder.CreateDefault(args);
             builder.Services.AddTransient<ILuminaireConfigurationService, LuminaireConfigurationService>();
+            builder.Services.AddScoped(http => new HttpClient
+            {
+                BaseAddress = new Uri(builder.HostEnvironment.BaseAddress)
+            });
             await builder.Build().RunAsync();
         }
     }

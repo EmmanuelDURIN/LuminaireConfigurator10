@@ -14,8 +14,7 @@ namespace LuminaireConfigurator10
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents()
                 .AddInteractiveWebAssemblyComponents();
-            // builder.Services.AddTransient<ILuminaireConfigurationService, LuminaireConfigurationService>();
-
+            builder.Services.AddControllers();
             var app = builder.Build();
 
             // Configure the HTTP request pipeline.
@@ -40,6 +39,8 @@ namespace LuminaireConfigurator10
                 .AddInteractiveServerRenderMode()
                 .AddInteractiveWebAssemblyRenderMode()
                 .AddAdditionalAssemblies(typeof(Client._Imports).Assembly);
+            
+            app.MapControllers();
 
             app.Run();
         }

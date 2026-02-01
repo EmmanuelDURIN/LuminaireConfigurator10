@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace LuminaireConfigurator10.Client.Pages
 {
-    public partial class ConfigurationDetails
+    public partial class ConfigurationDetails( ILuminaireConfigurationService luminaireConfigurationService )
     {
         [Parameter]
         public int Id { get; set; }
@@ -17,7 +17,6 @@ namespace LuminaireConfigurator10.Client.Pages
         }
         protected override async Task OnInitializedAsync()
         {
-            LuminaireConfigurationService luminaireConfigurationService = new LuminaireConfigurationService();
             Configuration = await luminaireConfigurationService.GetLuminaireConfigurationById(Id);
             Loaded = true;
         }
