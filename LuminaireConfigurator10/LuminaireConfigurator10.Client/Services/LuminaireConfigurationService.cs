@@ -40,7 +40,7 @@ namespace LuminaireConfigurator10.Client.Services
             };
     public async Task<LuminaireConfiguration?> GetLuminaireConfigurationById(int id)
     {
-      await Task.Delay(500);
+      await Task.Delay(2000);
       return luminaireConfigurations.FirstOrDefault( lc => lc.Id == id);
     }
     public async Task<List<LuminaireConfiguration>> GetLuminaireConfigurations()

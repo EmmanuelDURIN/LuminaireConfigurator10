@@ -8,13 +8,10 @@ namespace LuminaireConfigurator10.Client.Pages
     {
         [Parameter]
         public int Id { get; set; }
+        [PersistentState]
         public bool Loaded { get; set; }
-        private LuminaireConfiguration? configuration;
-        public LuminaireConfiguration? Configuration
-        {
-            get => configuration;
-            set => configuration = value;
-        }
+        [PersistentState]
+        public LuminaireConfiguration? Configuration { get; set; }
         protected override async Task OnInitializedAsync()
         {
             LuminaireConfigurationService luminaireConfigurationService = new LuminaireConfigurationService();
