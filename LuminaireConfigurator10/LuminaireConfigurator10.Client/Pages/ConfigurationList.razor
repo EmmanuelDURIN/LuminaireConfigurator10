@@ -30,7 +30,7 @@ else
             @foreach (LuminaireConfiguration configuration in luminaireConfigurations)
             {
                 <tr>
-                    <td>@configuration.Name</td>
+                    <td><a href="/configurationdetails/@configuration.Id">@configuration.Name</a></td>
                     <td>@configuration.CreationTime.ToShortDateString()</td>
                     <td>@configuration.LampColor (°K)</td>
                     <td>@configuration.Optic</td>
