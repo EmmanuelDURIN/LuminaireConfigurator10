@@ -1,4 +1,5 @@
 ﻿@page "/configurationcreation"
+@using LuminaireConfigurator10.Client.Components
 @rendermode InteractiveAuto
 
 <h1>New Configuration @(IsModified?"*":"")</h1>
@@ -15,13 +16,7 @@
     <div class="form-group row mb-1">
         <label class="col-sm-3 col-form-label" for="Optic">Optic</label>
         <div class="col-sm-9">
-            <InputSelect class="form-control"  @bind-Value="@Configuration.Optic"  >
-                @foreach (var optic in this.Optics)
-                {
-                    <option value="@optic">@optic</option>
-                }
-            </InputSelect>
-            <ValidationMessage For="@(()=> Configuration.Optic)" />
+            <CustomSelect Items="@this.Optics"></CustomSelect>
         </div>
     </div>
 
