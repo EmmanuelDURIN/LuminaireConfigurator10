@@ -7,21 +7,50 @@ namespace LuminaireConfigurator10.Client.Components
     public partial class CustomSelect<TItem, TValue, TDisplay>
                                       : ComponentBase
     {
-        [Parameter]
-        public RenderFragment? ChildContent { get; set; }
         // EditContext is inherited from the EditForm
         [CascadingParameter]
         private EditContext? CascadedEditContext { get; set; }
         // Got it from SelectedExpression in SetParametersAsync
         protected internal FieldIdentifier FieldIdentifier { get; set; }
-        private TItem? selected;
         // A standardly named property is also in the convention
         // for easy to use databinding
         [Parameter, EditorRequired]
         public TItem? Selected
         {
-            get => selected;
-            set => selected = value;
+            get => field;
+            set
+            {
+                if (field == null && value == null)
+                    return;
+                if (field?.Equals(value) != true)
+                {
+                    field = value;
+                    SelectedChanged.InvokeAsync(value);
+                    SelectedValue = value != null ? ValueSelector(value) : default;
+                    // SelectedValueChanged.InvokeAsync(selectedValue);
+                    if (CascadedEditContext != null)
+                    {
+                        CascadedEditContext.NotifyFieldChanged(FieldIdentifier);
+                        CascadedEditContext.NotifyValidationStateChanged();
+                    }
+                }
+            }
+        }
+        [Parameter]
+        public EventCallback<TValue> SelectedValueChanged { get; set; }
+        public TValue? SelectedValue
+        {
+            get => field;
+            set
+            {
+                if (field == null && value == null)
+                    return;
+                if (field?.Equals(value) != true)
+                {
+                    field = value;
+                    Selected = Items.FirstOrDefault(i => value?.Equals(ValueSelector(i)) == true);
+                }
+            }
         }
         [Parameter] public EventCallback<TItem> SelectedChanged { get; set; }
         // {PropertyName}Expression if the convention for adequate databinding of property
@@ -35,28 +64,6 @@ namespace LuminaireConfigurator10.Client.Components
         public IEnumerable<TItem> Items { get; set; } = Enumerable.Empty<TItem>();
         [Parameter, EditorRequired]
         public Func<TItem, TValue> ValueSelector { get; set; } = null!;
-        [Parameter]
-        public EventCallback<TValue> SelectedValueChanged { get; set; }
-        private TValue? selectedValue;
-        public TValue? SelectedValue
-        {
-            get => selectedValue;
-            set
-            {
-                if (selectedValue?.Equals(value) == false)
-                {
-                    selectedValue = value;
-                    selected = Items.FirstOrDefault(i => value?.Equals(ValueSelector(i)) == true);
-                    SelectedValueChanged.InvokeAsync(value);
-                    SelectedChanged.InvokeAsync(selected);
-                    if (CascadedEditContext != null)
-                    {
-                        CascadedEditContext.NotifyFieldChanged(FieldIdentifier);
-                        CascadedEditContext?.NotifyValidationStateChanged();
-                    }
-                }
-            }
-        }
         public override Task SetParametersAsync(ParameterView parameters)
         {
             parameters.SetParameterProperties(this);

@@ -2,7 +2,6 @@
 @typeparam TValue
 @typeparam TDisplay
 <select class="form-control" @bind="@SelectedValue">
-    @ChildContent
     @foreach (TItem item in Items)
     {
         var currentValue = ValueSelector(item);

@@ -39,7 +39,7 @@ namespace LuminaireConfigurator10.Client.Pages
         public List<Optic?> Optics { get; set; } = new List<Optic?>();
         [Required]
         public Optic? Optic { get; set; } = nullOptic;
-        private static  Optic? nullOptic = new Optic(Id: 0, Name: "Please select one");
+        private static  Optic? nullOptic = null;
         protected async override Task OnInitializedAsync()
         {
             var opticService = new OpticService();
