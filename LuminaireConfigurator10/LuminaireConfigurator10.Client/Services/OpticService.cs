@@ -15,7 +15,6 @@ namespace LuminaireConfigurator10.Client.Services
     public async Task<List<Optic>> GetOptics()
     {
       await Task.Delay(300);
-
       return optics;
     }
   }

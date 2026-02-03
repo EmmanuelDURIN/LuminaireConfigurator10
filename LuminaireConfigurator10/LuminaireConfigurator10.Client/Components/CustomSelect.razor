@@ -1,12 +1,12 @@
 ﻿@typeparam TItem
 @typeparam TValue
 @typeparam TDisplay
-
 <select class="form-control" @bind="@SelectedValue">
     @ChildContent
-    @foreach (var item in Items)
+    @foreach (TItem item in Items)
     {
-        bool isSelected = item?.Equals(Selected) == true;
-        <option value="@ValueSelector(item)" selected="@isSelected">@DisplaySelector(item)</option>
+        var currentValue = ValueSelector(item);
+        bool isSelected = (currentValue?.Equals(SelectedValue) == true);
+        <option value="@currentValue" selected="@isSelected">@DisplaySelector(item)</option>
     }
 </select>

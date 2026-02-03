@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Components.Forms;
 using LuminaireConfigurator10.Client.Model;
 using System.ComponentModel.DataAnnotations;
+using System.Data.Common;
 
 namespace LuminaireConfigurator10.Client.Pages
 {
@@ -34,15 +35,17 @@ namespace LuminaireConfigurator10.Client.Pages
         {
             Console.WriteLine("configuration created");
         }
-        public int[] LampColors { get; set; } = [2200, 2700, 3000, 4000, 5700];
-        public List<Optic> Optics { get; set; } = new List<Optic>();
+        public int?[] LampColors { get; set; } = [null, 2200, 2700, 3000, 4000, 5700];
+        public List<Optic?> Optics { get; set; } = new List<Optic?>();
         [Required]
-        public Optic Optic { get; set; } = new Optic ( Id : 1, Name : "OM10" );
-
+        public Optic? Optic { get; set; } = nullOptic;
+        private static  Optic? nullOptic = new Optic(Id: 0, Name: "Please select one");
         protected async override Task OnInitializedAsync()
         {
             var opticService = new OpticService();
-            Optics = await opticService.GetOptics();
+            Optics = new List<Optic?>{nullOptic}
+                         .Concat((await opticService.GetOptics()))
+                         .ToList();
             await base.OnInitializedAsync();
         }
     }
