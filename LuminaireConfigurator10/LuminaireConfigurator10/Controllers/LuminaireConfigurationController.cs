@@ -58,5 +58,21 @@ namespace WebApiWeatherForeCast.Controllers
             luminaireConfigurations.Add(lumConf);
             return CreatedAtAction(nameof(GetById), routeValues: new { Id = lumConf.Id }, lumConf);
         }
+
+        const int totalLuminaires = 500_000;
+        [HttpGet("count")]
+        public int GetCount() => totalLuminaires;
+        [HttpGet("range")]
+        public IEnumerable<LuminaireConfiguration> GetRange(int startIndex, int numConfigurations)
+          => Enumerable.Range(startIndex, numConfigurations).Select(i => new LuminaireConfiguration
+          {
+              Id = i,
+              Name = "Luminaire" + i,
+              CreationTime = DateTime.Now,
+              LampColor = 3000 + (i % 2000),
+              Optic = "OM" + (i % 10),
+              LampFlux = 1000,
+          })
+          .ToArray();
     }
 }

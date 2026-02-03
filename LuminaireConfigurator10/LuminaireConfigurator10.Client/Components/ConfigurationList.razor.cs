@@ -12,20 +12,19 @@ namespace LuminaireConfigurator10.Client.Components
             get => luminaireConfigurations;
             set => luminaireConfigurations = value;
         }
-        private LuminaireConfiguration? selectedConfiguration;
         [Parameter]
         public LuminaireConfiguration? SelectedConfiguration
         {
-            get { return selectedConfiguration; }
+            get { return field; }
             set
             {
-                if (selectedConfiguration != value)
+                if (field != value)
                 {
-                    selectedConfiguration = value;
+                    field = value;
                     SelectedConfigurationChanged.InvokeAsync(value);
                 }
             }
-        }
+        } 
         [Parameter]
         public EventCallback<LuminaireConfiguration?> SelectedConfigurationChanged
         { get; set; }

@@ -13,7 +13,7 @@ namespace LuminaireConfigurator10.Client.Pages
     protected override Task OnInitializedAsync()
     {
       Console.WriteLine("Before Enumerable.Range");
-      LuminaireConfigurations = Enumerable.Range(1, 500_000)
+      LuminaireConfigurations = Enumerable.Range(1, 50_000)
                                           .Select(
                                             i => new LuminaireConfiguration
                                             {

@@ -1,8 +1,5 @@
 ﻿@page "/hugelist"
-<<<<<<< HEAD
 @rendermode @(new InteractiveWebAssemblyRenderMode(prerender:false) )
-=======
->>>>>>> 6d72fcf6110f5296445144858574f6a1d27d9da5
 
 <h1>Configuration List</h1>
 
@@ -25,12 +22,7 @@ else
             </tr>
         </thead>
         <tbody>
-<<<<<<< HEAD
             <Virtualize Items="luminaireConfigurations" Context="configuration" >   
-=======
-            @foreach (var configuration in luminaireConfigurations)
-            {
->>>>>>> 6d72fcf6110f5296445144858574f6a1d27d9da5
                 <tr>
                     <td><a href="configurationdetails/@configuration.Id">@configuration.Name</a></td>
                     <td>@configuration.CreationTime.ToShortDateString()</td>
@@ -38,11 +30,7 @@ else
                     <td>@configuration.Optic</td>
                     <td>@configuration.LampFlux</td>
                 </tr>
-<<<<<<< HEAD
             </Virtualize>
-=======
-            }
->>>>>>> 6d72fcf6110f5296445144858574f6a1d27d9da5
         </tbody>
     </table>
 }
