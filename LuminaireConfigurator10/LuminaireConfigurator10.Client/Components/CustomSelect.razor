@@ -2,11 +2,14 @@
 @typeparam TValue
 @typeparam TDisplay
 
-<select class="form-control" @bind="@SelectedValue">
+<select class="form-control" @bind="@SelectedValue" size="@Size">
     @ChildContent
-    @foreach (var item in Items)
+    @if (Items!= null)    
     {
-        bool isSelected = item?.Equals(Selected) == true;
-        <option value="@ValueSelector(item)" selected="@isSelected">@DisplaySelector(item)</option>
+        foreach (var item in Items)
+        {
+            bool isSelected = item?.Equals(Selected) == true;
+            <option value="@ValueSelector(item)" selected="@isSelected">@DisplaySelector(item)</option>
+        }
     }
 </select>

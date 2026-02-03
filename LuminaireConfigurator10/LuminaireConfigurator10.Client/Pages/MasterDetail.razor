@@ -1,0 +1,18 @@
+﻿@page "/masterdetail"
+@rendermode @(new InteractiveWebAssemblyRenderMode(prerender:false) )
+
+@using LuminaireConfigurator10.Client.Model
+@using LuminaireConfigurator10.Client.Components
+
+<PageTitle>Configurations</PageTitle>
+
+<h1>Configurations</h1>
+
+<div class="container">
+  <div class="row">
+    <div class="col "><ConfigurationList @bind-SelectedConfiguration="@SelectedConfiguration"/>
+    </div>
+    <div class="col"><ConfigurationDetails Configuration="@SelectedConfiguration"/>
+    </div>
+  </div>
+</div>

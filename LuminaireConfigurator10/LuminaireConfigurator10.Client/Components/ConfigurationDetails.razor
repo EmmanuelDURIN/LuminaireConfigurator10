@@ -1,8 +1,4 @@
-﻿@page "/configurationdetails/{id:int}"
-@rendermode @(new InteractiveWebAssemblyRenderMode(prerender:false) )
-
-
-@if (Configuration != null)
+﻿@if (Configuration != null)
 {
     <h1>Details of configuration @Configuration.Name</h1>
 
@@ -39,15 +35,3 @@
         </dd>
     </dl>
 }
-else
-{
-    if( Loaded )
-    {
-        <div>Requested configuration with id=@Id doesn't exist</div>
-    }
-    else
-    {
-        <div>Loading...</div>
-    }
-}
-

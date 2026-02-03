@@ -5,6 +5,9 @@ namespace LuminaireConfigurator10.Client.Components
     public partial class CustomSelect<TItem, TValue, TDisplay>
     {
         [Parameter]
+        public int Size { get; set; } = 1;
+
+        [Parameter]
         public IEnumerable<TItem> Items { get; set; } = Enumerable.Empty<TItem>();
 
         [Parameter]
@@ -24,7 +27,7 @@ namespace LuminaireConfigurator10.Client.Components
             Selected = Items.FirstOrDefault(i => ValueSelector(i)?.ToString()?.Equals(e.Value?.ToString()) == true);
             await SelectedChanged.InvokeAsync(Selected);
         }
-       
+
         [Parameter]
         public EventCallback<TItem> SelectedChanged { get; set; }
 

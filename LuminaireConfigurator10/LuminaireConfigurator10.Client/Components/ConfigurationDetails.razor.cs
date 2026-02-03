@@ -2,23 +2,18 @@
 using LuminaireConfigurator10.Client.Services;
 using Microsoft.AspNetCore.Components;
 
-namespace LuminaireConfigurator10.Client.Pages
+namespace LuminaireConfigurator10.Client.Components
 {
-    public partial class ConfigurationDetails( ILuminaireConfigurationService luminaireConfigurationService )
+    public partial class ConfigurationDetails(ILuminaireConfigurationService luminaireConfigurationService)
     {
         [Parameter]
         public int Id { get; set; }
-        public bool Loaded { get; set; }
         private LuminaireConfiguration? configuration;
+        [Parameter]
         public LuminaireConfiguration? Configuration
         {
             get => configuration;
             set => configuration = value;
-        }
-        protected override async Task OnInitializedAsync()
-        {
-            Configuration = await luminaireConfigurationService.GetLuminaireConfigurationById(Id);
-            Loaded = true;
         }
     }
 }

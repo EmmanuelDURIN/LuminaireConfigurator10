@@ -1,0 +1,6 @@
+﻿@using LuminaireConfigurator10.Client.Model
+
+
+<CustomSelect Size="20" Items="@luminaireConfigurations" @bind-Selected="SelectedConfiguration"
+    ValueSelector="@(l => l.Id)" DisplaySelector="@(l => $"{l.Name}, {l.Optic}, {l.LampColor}°K")">
+</CustomSelect>
