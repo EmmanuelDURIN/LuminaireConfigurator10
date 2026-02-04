@@ -4,8 +4,10 @@ using Microsoft.AspNetCore.SignalR.Client;
 
 namespace LuminaireConfigurator10.Client.Pages
 {
-    public partial class DeliveryCenter(NavigationManager navigationManager)
+    public partial class DeliveryCenter
     {
+        private HubConnection hubConnection;
+        private readonly NavigationManager navigationManager;
         public List<LuminaireConfiguration>? LuminaireConfigurations { get; set; }
         [Parameter]
         public LuminaireConfiguration? SelectedConfiguration
@@ -22,18 +24,14 @@ namespace LuminaireConfigurator10.Client.Pages
         }
         [Parameter]
         public EventCallback<LuminaireConfiguration?> SelectedConfigurationChanged { get; set; }
-        protected override async Task OnInitializedAsync()
+        public DeliveryCenter(NavigationManager navigationManager)
         {
-            await ConnectToHub();
+            this.navigationManager = navigationManager;
+            hubConnection = GetHubConnection();
         }
-        protected async Task Deliver()
+        private HubConnection GetHubConnection()
         {
-            await hubConnection?.InvokeAsync("ConfigurationDelivered", SelectedConfiguration);
-        }
-        private HubConnection? hubConnection = null;
-        private async Task ConnectToHub()
-        {
-            hubConnection = new HubConnectionBuilder()
+            var hubConnection = new HubConnectionBuilder()
                 .WithUrl(navigationManager.ToAbsoluteUri("/deliveryhub"))
                 .Build();
             hubConnection.On<LuminaireConfiguration>(nameof(IDeliveryCenterNotification.OnConfigurationDelivered),
@@ -43,8 +41,18 @@ namespace LuminaireConfigurator10.Client.Pages
                   LuminaireConfigurations?.Remove(lumConf);
                   InvokeAsync(() => StateHasChanged());
               });
+            return hubConnection;
+        }        
+        protected override async Task OnInitializedAsync()
+        {
+
+Console.WriteLine( $"RendererInfo.Name : {RendererInfo.Name}");
+Console.WriteLine($"OperatingSystem.IsBrowser() {OperatingSystem.IsBrowser()}");
             await hubConnection.StartAsync();
-            LuminaireConfigurations = await hubConnection.InvokeAsync<List<LuminaireConfiguration>>("GetDeliveries");
+        }
+        protected async Task Deliver()
+        {
+            await hubConnection.InvokeAsync("ConfigurationDelivered", SelectedConfiguration, CancellationToken.None);
         }
     }
 }

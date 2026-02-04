@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Components;
 
 namespace LuminaireConfigurator10.Client.Components
 {
-    public partial class ConfigurationDetails(ILuminaireConfigurationService luminaireConfigurationService)
+    public partial class ConfigurationDetails
     {
         [Parameter]
         public int Id { get; set; }

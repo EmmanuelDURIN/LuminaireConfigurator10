@@ -16,7 +16,7 @@ namespace LuminaireConfigurator10.Client.Services
       List<LuminaireConfiguration>? luminaireConfigurations = await httpClient.GetFromJsonAsync<List<LuminaireConfiguration>>(requestUri: $"api/luminaireconfiguration", CancellationToken.None);
       return luminaireConfigurations;
     }
-    public async Task<LuminaireConfiguration?> PostAsync(LuminaireConfiguration luminaireConfiguration)
+    public async Task<LuminaireConfiguration?> PostAsync(LuminaireConfiguration? luminaireConfiguration)
     {
       HttpResponseMessage httpResponseMessage = await httpClient.PostAsJsonAsync("api/luminaireconfiguration", luminaireConfiguration);
       httpResponseMessage.EnsureSuccessStatusCode();
