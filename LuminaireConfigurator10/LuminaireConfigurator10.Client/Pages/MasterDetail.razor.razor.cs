@@ -8,17 +8,15 @@ namespace LuminaireConfigurator10.Client.Pages
 {
     public partial class MasterDetail
     {
-
-        private LuminaireConfiguration? selectedConfiguration;
         [Parameter]
         public LuminaireConfiguration? SelectedConfiguration
         {
-            get { return selectedConfiguration; }
+            get { return field; }
             set
             {
-                if (selectedConfiguration != value)
+                if (field != value)
                 {
-                    selectedConfiguration = value;
+                    field = value;
                     SelectedConfigurationChanged.InvokeAsync(value);
                 }
             }

@@ -38,13 +38,16 @@ namespace WebApiWeatherForeCast.Controllers
                 Name="Luminaires Puteaux"
               },
             };
+
+        public static List<LuminaireConfiguration> LuminaireConfigurations { get => luminaireConfigurations; set => luminaireConfigurations = value; }
+
         [HttpGet]
         public List<LuminaireConfiguration> GetAll()
-            => luminaireConfigurations;
+            => LuminaireConfigurations;
         [HttpGet("{id}")]
         public ActionResult GetById(int id)
         {
-            LuminaireConfiguration? lumConf = luminaireConfigurations
+            LuminaireConfiguration? lumConf = LuminaireConfigurations
                                                .FirstOrDefault(l => l.Id == id);
             if (lumConf == null)
                 return NotFound("No Luminaire with id=" + id);
@@ -53,9 +56,9 @@ namespace WebApiWeatherForeCast.Controllers
         [HttpPost]
         public ActionResult Post(LuminaireConfiguration lumConf)
         {
-            int maxId = luminaireConfigurations.Max(l => l.Id);
+            int maxId = LuminaireConfigurations.Max(l => l.Id);
             lumConf.Id = maxId + 1;
-            luminaireConfigurations.Add(lumConf);
+            LuminaireConfigurations.Add(lumConf);
             return CreatedAtAction(nameof(GetById), routeValues: new { Id = lumConf.Id }, lumConf);
         }
     }

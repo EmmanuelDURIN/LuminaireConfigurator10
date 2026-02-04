@@ -1,6 +1,7 @@
 using LuminaireConfigurator10.Client.Pages;
 using LuminaireConfigurator10.Client.Services;
 using LuminaireConfigurator10.Components;
+using Microsoft.AspNetCore.ResponseCompression;
 
 namespace LuminaireConfigurator10
 {
@@ -14,6 +15,14 @@ namespace LuminaireConfigurator10
             builder.Services.AddRazorComponents()
                 .AddInteractiveServerComponents()
                 .AddInteractiveWebAssemblyComponents();
+                
+            builder.Services.AddSignalR();
+            builder.Services.AddResponseCompression(opts =>
+            {
+                opts.MimeTypes = ResponseCompressionDefaults.MimeTypes.Concat(
+                                [ "application/octet-stream" ]);
+            });
+
             builder.Services.AddControllers();
             var app = builder.Build();
 
@@ -40,7 +49,9 @@ namespace LuminaireConfigurator10
                 .AddInteractiveWebAssemblyRenderMode()
                 .AddAdditionalAssemblies(typeof(Client._Imports).Assembly);
             
+            app.UseResponseCompression();
             app.MapControllers();
+            app.MapHub<DeliveryHub>("/deliveryhub");
 
             app.Run();
         }
