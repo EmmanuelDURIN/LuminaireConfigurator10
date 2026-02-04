@@ -39,7 +39,9 @@ namespace WebApiWeatherForeCast.Controllers
               },
             };
 
-        public static List<LuminaireConfiguration> LuminaireConfigurations { get => luminaireConfigurations; set => luminaireConfigurations = value; }
+        public static List<LuminaireConfiguration> LuminaireConfigurations 
+        { get => luminaireConfigurations; set => luminaireConfigurations = value; }
+         
 
         [HttpGet]
         public List<LuminaireConfiguration> GetAll()

@@ -42,13 +42,13 @@ namespace LuminaireConfigurator10.Client.Pages
                   InvokeAsync(() => StateHasChanged());
               });
             return hubConnection;
-        }        
+        }
         protected override async Task OnInitializedAsync()
         {
-
-Console.WriteLine( $"RendererInfo.Name : {RendererInfo.Name}");
-Console.WriteLine($"OperatingSystem.IsBrowser() {OperatingSystem.IsBrowser()}");
+            Console.WriteLine($"RendererInfo.Name : {RendererInfo.Name}");
+            Console.WriteLine($"OperatingSystem.IsBrowser() {OperatingSystem.IsBrowser()}");
             await hubConnection.StartAsync();
+            LuminaireConfigurations = await hubConnection.InvokeAsync<List<LuminaireConfiguration>>("GetDeliveries", CancellationToken.None);
         }
         protected async Task Deliver()
         {
